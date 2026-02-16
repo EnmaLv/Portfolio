@@ -1,17 +1,144 @@
 ---
-
+// Puedes agregar imports de componentes de Astro aquí si los necesitas
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/index.css" />
+
+    <!-- Meta tags para SEO y redes sociales -->
+    <meta
+      name="description"
+      content="Portfolio de EnmaDev - Desarrollador Web"
+    />
+    <meta name="theme-color" content="#0b7a75" />
+
+    <title>EnmaDev | Portfolio</title>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <!-- Logo y marca -->
+        <div class="nav-left">
+          <a href="/" class="brand">
+            <img
+              src="/images/Logo-Light.png"
+              alt="Logo Enmanuel Medina"
+              class="logo"
+              id="mainLogo"
+            />
+            <p class="brand-title" style="padding: 0; margin: 0;">
+              FullStack<span
+                class="brand-subtitle"
+                style="display: block; font-size: 0.75rem; margin: 0; line-height: 1;"
+                >Developer</span>
+            </p>
+          </a>
+        </div>
+
+        <!-- Menú de navegación -->
+        <ul class="nav-center">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#sobre-mi">Sobre mí</a></li>
+          <li><a href="#proyectos">Proyectos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+
+        <!-- Controles (tema e idioma) -->
+        <div class="nav-right">
+          <button id="themeToggle" aria-label="Cambiar tema"
+            ><wa-icon name="moon" variant="light"></wa-icon></button>
+        </div>
+
+        <select id="languageSelect" aria-label="Seleccionar idioma">
+          <option value="es">ES</option>
+          <option value="en">EN</option>
+        </select>
+      </div>
+    </nav>
+  </body>
+
+  <!-- Contenido principal -->
+  <header id="inicio" class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1>
+        Soy <span>Enmanuel</span> <span class="accent" style="display: block; font-size: 1.75rem; margin: 0; line-height: 1;">Desarrollador | Fullstack</span>
+      </h1>
+
+      <p>
+        Apasionado por crear experiencias digitales modernas, eficientes y con impacto real.
+      </p>
+
+      <a href="#sobre-mi" class="hero-btn">
+        Conóceme
+      </a>
+    </div>
+  </header>
+
+  <main id="sobre-mi" class="main-section">
+    <div class="sobre-mi container">
+      <h2 class="section-title">Sobre mí</h2>
+
+      <p class="sobre-text">
+        Mi nombre es <strong>Enmanuel Medina</strong>.  
+        Fui mordido por una araña desarrolladora y desde hace un año descubrí que mi verdadera habilidad es transformar ideas en código.
+        <br /><br />
+        Como desarrollador <strong>Full-Stack</strong>, tejo soluciones entre el frontend y el backend, construyendo experiencias digitales modernas, rápidas y con impacto real.
+        <br /><br />
+        Me formé como <strong>Técnico en Informática</strong> y complemento mi aprendizaje de manera autodidacta, enfrentando nuevos retos y tecnologías en cada proyecto.
+      </p>
+      <div class="badges">
+          <span class="badge">HTML</span>
+          <span class="badge">CSS</span>
+          <span class="badge">JavaScript</span>
+          <span class="badge">PHP</span>
+          <span class="badge">Laravel</span>
+          <span class="badge">Livewire</span>
+          <span class="badge">Astro</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">Docker</span>
+          <span class="badge">Github</span>
+        </div>
+      </div>
+
+  </main>
+
+
+  <section id="proyectos">
+    <!-- Aquí van tus proyectos -->
+    <h2>Proyectos</h2>
+  </section>
+
+  <section id="contacto">
+    <!-- Aquí va tu formulario de contacto -->
+    <h2>Contacto</h2>
+  </section>
+
+  <footer>
+    <!-- Footer con tus redes sociales y copyright -->
+    <p>&copy; 2024 EnmaDev. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script -->
+  <script type="module" src="/src/scripts/index.js"></script>
 </html>
