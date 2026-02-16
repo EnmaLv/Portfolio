@@ -1,8 +1,9 @@
 if (typeof window !== "undefined") {
   window.addEventListener("DOMContentLoaded", () => {
+    
+    
     let lastScroll = 0;
 
-    // Elementos del DOM
     const navbar = document.getElementById("navbar");
     const themeToggle = document.getElementById("themeToggle");
     const navCenter = document.querySelector(".nav-center");
@@ -10,10 +11,12 @@ if (typeof window !== "undefined") {
     const mainLogo = document.getElementById("mainLogo");
     let isProgrammaticScroll = false;
 
-    if (!navbar || !themeToggle) return;
 
-    // ===== MENÚ MÓVIL =====
-    // Crear botón de hamburguesa si no existe
+    if (!navbar || !themeToggle) {
+      console.error("No se encontraron elementos esenciales");
+      return;
+    }
+
     let mobileToggle = document.querySelector(".mobile-menu-toggle");
     if (!mobileToggle) {
       mobileToggle = document.createElement("button");
@@ -25,14 +28,12 @@ if (typeof window !== "undefined") {
         <span></span>
       `;
       
-      // Insertar el botón antes del nav-right
       const navRight = document.querySelector(".nav-right");
       if (navRight) {
         navRight.parentNode.insertBefore(mobileToggle, navRight);
       }
     }
 
-    // Crear overlay para el menú móvil
     let overlay = document.querySelector(".mobile-overlay");
     if (!overlay) {
       overlay = document.createElement("div");
@@ -40,43 +41,111 @@ if (typeof window !== "undefined") {
       document.body.appendChild(overlay);
     }
 
-    // Toggle del menú móvil
     const toggleMobileMenu = () => {
       const isActive = mobileToggle.classList.toggle("active");
       navCenter?.classList.toggle("active");
       overlay.classList.toggle("active");
       
-      // Cambiar aria-label
       mobileToggle.setAttribute(
         "aria-label",
         isActive ? "Cerrar menú" : "Abrir menú"
       );
       
-      // Prevenir scroll cuando el menú está abierto
       document.body.style.overflow = isActive ? "hidden" : "";
     };
 
-    // Event listeners para menú móvil
     mobileToggle.addEventListener("click", toggleMobileMenu);
     overlay.addEventListener("click", toggleMobileMenu);
 
-    // Cerrar menú al hacer click en un enlace
-    const navLinks = document.querySelectorAll(".nav-center a");
-    navLinks.forEach(link => {
-      link.addEventListener("click", () => {
-        if (navCenter?.classList.contains("active")) {
-          toggleMobileMenu();
+    function smoothScrollTo(targetPosition, duration = 800) {
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      let startTime = null;
+
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+        
+        const ease = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+        window.scrollTo(0, startPosition + distance * ease);
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        } else {
+          isProgrammaticScroll = false;
+        }
+      }
+
+      requestAnimationFrame(animation);
+    }
+
+    const supportsNativeSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+    
+    const allLinks = document.querySelectorAll('a[href^="#"]');
+    
+    allLinks.forEach((link, index) => {
+      
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute("href");
+        
+        if (targetId === "#") {
+          isProgrammaticScroll = true;
+          if (supportsNativeSmoothScroll) {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+            setTimeout(() => {
+              isProgrammaticScroll = false;
+            }, 1000);
+          } else {
+            smoothScrollTo(0);
+          }
+          return;
+        }
+        
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          if (navCenter?.classList.contains("active")) {
+            toggleMobileMenu();
+          }
+          
+          isProgrammaticScroll = true;
+          
+          const navbarHeight = navbar.offsetHeight;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          if (supportsNativeSmoothScroll) {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+            
+            setTimeout(() => {
+              isProgrammaticScroll = false;
+            }, 1000);
+          } else {
+            smoothScrollTo(offsetPosition);
+          }
+        } else {
+          console.error("No se encontró el elemento:", targetId);
         }
       });
     });
 
-    // ===== SCROLL SHOW/HIDE NAVBAR =====
     let ticking = false;
     
     const handleScroll = () => {
       const currentScroll = window.pageYOffset;
 
-      // Si es scroll automático solo actualizamos referencia
       if (isProgrammaticScroll) {
         lastScroll = currentScroll;
         ticking = false;
@@ -93,7 +162,6 @@ if (typeof window !== "undefined") {
       ticking = false;
     };
 
-
     window.addEventListener("scroll", () => {
       if (!ticking) {
         window.requestAnimationFrame(handleScroll);
@@ -101,23 +169,22 @@ if (typeof window !== "undefined") {
       }
     });
 
-    // ===== DARK MODE TOGGLE =====
     const updateThemeIcon = (isDark) => {
-    themeToggle.innerHTML = `
-      <img 
-        src="${isDark ? '/images/sun.png' : '/images/moon-svgrepo-com.svg'}" 
-        alt="${isDark ? 'Modo claro' : 'Modo oscuro'}"
-        class="theme-icon"
-      />
-    `;
+      themeToggle.innerHTML = `
+        <img 
+          src="${isDark ? '/images/sun.png' : '/images/moon-svgrepo-com.svg'}" 
+          alt="${isDark ? 'Modo claro' : 'Modo oscuro'}"
+          class="theme-icon"
+        />
+      `;
 
-    themeToggle.setAttribute(
-      "aria-label",
-      isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
-    );
-  };
+      themeToggle.setAttribute(
+        "aria-label",
+        isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+      );
+    };
 
-  const updateLogo = (isDark) => {
+    const updateLogo = (isDark) => {
       if (!mainLogo) return;
 
       mainLogo.style.opacity = "0";
@@ -131,7 +198,6 @@ if (typeof window !== "undefined") {
       }, 100);
     };
 
-
     themeToggle.addEventListener("click", () => {
       const isDark = document.body.classList.toggle("dark");
       
@@ -140,8 +206,6 @@ if (typeof window !== "undefined") {
       updateLogo(isDark);
     });
 
-
-    // Cargar preferencia guardada o detectar preferencia del sistema
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     
@@ -154,15 +218,12 @@ if (typeof window !== "undefined") {
       updateLogo(false);
     }
 
-
-    // Escuchar cambios en la preferencia del sistema
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
       if (!localStorage.getItem("theme")) {
         if (e.matches) {
           document.body.classList.add("dark");
           updateThemeIcon(true);
           updateLogo(true);
-
         } else {
           document.body.classList.remove("dark");
           updateThemeIcon(false);
@@ -171,47 +232,16 @@ if (typeof window !== "undefined") {
       }
     });
 
-    // ===== SMOOTH SCROLL =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        
-        if (target) {
-          const offsetTop = target.offsetTop - navbar.offsetHeight;
-          isProgrammaticScroll = true;
-
-            window.scrollTo({
-              top: offsetTop,
-              behavior: "smooth"
-            });
-
-            // desactivar la bandera después de que termine
-            setTimeout(() => {
-              isProgrammaticScroll = false;
-            }, 700);
-
-        }
-      });
-    });
-
-    // ===== LANGUAGE SELECT (preparado para futuras traducciones) =====
     if (languageSelect) {
-      // Cargar idioma guardado
       const savedLang = localStorage.getItem("language") || "es";
       languageSelect.value = savedLang;
 
       languageSelect.addEventListener("change", (e) => {
         const selectedLang = e.target.value;
         localStorage.setItem("language", selectedLang);
-        
-        // Aquí puedes agregar la lógica para cambiar el idioma
-        console.log(`Idioma cambiado a: ${selectedLang}`);
-        // document.documentElement.lang = selectedLang;
       });
     }
 
-    // ===== CERRAR MENÚ MÓVIL AL CAMBIAR TAMAÑO DE VENTANA =====
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
@@ -222,8 +252,6 @@ if (typeof window !== "undefined") {
       }, 250);
     });
 
-    // ===== ANIMACIÓN DE ENTRADA =====
-    // Agregar clase para animaciones cuando la página carga
     setTimeout(() => {
       navbar.classList.add("loaded");
     }, 100);

@@ -1,70 +1,55 @@
-/* ===== VARIABLES DISEÑO SPIDER-VERSE ===== */
 :root {
-  /* ===== COLORES PRINCIPALES (Spider-Verse) ===== */
-  --color-primary: #ff003c;        /* rojo Miles */
-  --color-primary-glow: #ff1a4d;   /* rojo neón */
-  --color-secondary: #7a00ff;      /* violeta eléctrico */
-  --color-electric: #00d9ff;       /* azul energía */
+  --color-primary: #ff003c;       
+  --color-primary-glow: #ff1a4d;   
+  --color-secondary: #7a00ff;      
+  --color-electric: #00d9ff;      
   
-  /* ===== COLORES DE ACENTO ===== */
   --color-accent: #ff003c;
   --color-accent-light: #ff1a4d;
   --color-accent-dark: #cc0030;
   
-  /* ===== FONDOS MODO CLARO ===== */
   --bg-light: #f5f5f5;
   --bg-white: #ffffff;
   --bg-card-light: #ffffff;
   
-  /* ===== FONDOS MODO OSCURO ===== */
-  --bg-dark: #0a0a0f;              /* negro profundo */
-  --bg-dark-alt: #11111a;          /* negro azulado */
-  --bg-card-dark: #151522;         /* tarjetas oscuras */
+  --bg-dark: #0a0a0f;            
+  --bg-dark-alt: #11111a;         
+  --bg-card-dark: #151522;         
   --bg-glass: rgba(255, 0, 60, 0.08);
 
-  /* ===== TEXTO MODO CLARO ===== */
   --text-light: #333333;
   --text-light-secondary: #666666;
   
-  /* ===== TEXTO MODO OSCURO ===== */
   --text-dark: #ffffff;
   --text-dark-secondary: #c2c2d6;
   --text-muted: #8a8aa3;
 
-  /* ===== BORDES ===== */
   --border-glow: rgba(255, 0, 60, 0.6);
 
-  /* ===== ESPACIADO ===== */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 3rem;
   --spacing-xl: 4rem;
 
-  /* ===== BREAKPOINTS ===== */
   --breakpoint-mobile: 480px;
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1024px;
   --breakpoint-wide: 1200px;
 
-  /* ===== SOMBRAS NORMALES ===== */
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
   
-  /* ===== SOMBRAS GLOW (Spider-Verse) ===== */
   --shadow-glow-sm: 0 0 10px rgba(255, 0, 60, 0.3);
   --shadow-glow-md: 0 0 20px rgba(255, 0, 60, 0.4);
   --shadow-glow-lg: 0 0 35px rgba(255, 0, 60, 0.6);
 
-  /* ===== TRANSICIONES ===== */
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
 }
 
-
-/* ===== RESET Y BASE ===== */
 * {
 	margin: 0;
 	padding: 0;
@@ -75,14 +60,17 @@ body {
   padding: 0;
   margin: 0;
   font-family: "SN Pro", sans-serif;
-  background-color: var(--bg-main);
-  color: var(--text-primary);
+  background-color: var(--bg-light);
+  color: var(--text-light);
   transition: all var(--transition-normal);
   overflow-x: hidden;
 }
 
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
 
-/* ===== NAVBAR BASE ===== */
 .navbar {
 	position: fixed;
 	top: 0;
@@ -108,7 +96,6 @@ body {
 	padding: var(--spacing-sm) var(--spacing-md);
 }
 
-/* ===== LOGO Y BRAND ===== */
 .nav-left {
 	flex-shrink: 0;
 }
@@ -148,7 +135,6 @@ body {
 	opacity: 0.9;
 }
 
-/* ===== NAV CENTER (MENÚ) ===== */
 .nav-center {
 	list-style: none;
 	display: flex;
@@ -184,7 +170,6 @@ body {
 	width: 100%;
 }
 
-/* ===== NAV RIGHT (CONTROLES) ===== */
 .nav-right {
 	display: flex;
 	align-items: center;
@@ -228,7 +213,6 @@ body {
 	outline-offset: 2px;
 }
 
-/* ===== BOTÓN DE MENÚ MÓVIL (HAMBURGUESA) ===== */
 .mobile-menu-toggle {
 	display: none;
 	background: none;
@@ -261,7 +245,6 @@ body {
 	transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* ===== MODO OSCURO ===== */
 body.dark {
 	background-color: var(--bg-dark);
 	color: var(--text-dark);
@@ -293,7 +276,6 @@ body.dark .mobile-menu-toggle span {
 	background: var(--text-dark);
 }
 
-/* ===== CONTENIDO PRINCIPAL ===== */
 header, main, section, footer {
 	min-height: 100vh;
 	padding: var(--spacing-xl) var(--spacing-md);
@@ -302,10 +284,8 @@ header, main, section, footer {
 }
 
 header {
-	margin-top: 80px; /* Espacio para el navbar fijo */
+	margin-top: 80px;
 }
-
-/* ===== HERO ===== */
 
 .hero {
   position: relative;
@@ -316,10 +296,9 @@ header {
   text-align: center;
   overflow: hidden;
   color: white;
-  margin-top: 70px; /* ya compensas el navbar */
+  margin-top: 70px;
 }
 
-/* ===== HERO IMAGEN BASE (modo claro por defecto) ===== */
 .hero::before {
   content: "";
   position: absolute;
@@ -330,13 +309,10 @@ header {
   z-index: -2;
 }
 
-/* ===== MODO OSCURO ===== */
 body.dark .hero::before {
   background: url("/images/spider.webp") center/cover no-repeat;
 }
 
-
-/* Overlay oscuro */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -348,7 +324,6 @@ body.dark .hero::before {
   z-index: -1;
 }
 
-/* Contenido */
 .hero-content {
   max-width: 800px;
   padding: 0 1rem;
@@ -356,7 +331,6 @@ body.dark .hero::before {
   opacity: 0;
 }
 
-/* Título */
 .hero h1 {
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 700;
@@ -367,14 +341,12 @@ body.dark .hero::before {
   color: var(--color-accent-light);
 }
 
-/* Texto */
 .hero p {
   font-size: 1.2rem;
   opacity: 0.9;
   margin-bottom: 2rem;
 }
 
-/* Botón */
 .hero-btn {
   display: inline-block;
   padding: 0.9rem 2rem;
@@ -393,7 +365,6 @@ body.dark .hero::before {
   box-shadow: var(--shadow-glow-lg);
 }
 
-/* Animación entrada */
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -404,8 +375,6 @@ body.dark .hero::before {
     transform: translateY(0);
   }
 }
-
-/* ===== SOBRE MI ===== */
 
 .section-title {
   font-size: 2.5rem;
@@ -433,8 +402,6 @@ body.dark .hero::before {
   font-size: 1.1rem;
   color: inherit;
 }
-
-/* ===== BADGES ===== */
 
 .skills h3 {
   margin-bottom: var(--spacing-md);
@@ -464,7 +431,6 @@ body.dark .hero::before {
   overflow: hidden;
 }
 
-/* Glow efecto Spider */
 .badge:hover {
   transform: translateY(-4px) scale(1.05);
   box-shadow: var(--shadow-glow-md);
@@ -472,7 +438,6 @@ body.dark .hero::before {
   color: white;
 }
 
-/* Modo oscuro para badges */
 body.dark .badge {
   background: var(--bg-card-dark);
   color: var(--text-dark);
@@ -485,10 +450,35 @@ body.dark .badge:hover {
   color: white;
 }
 
+#sobre-mi {
+  background: var(--bg-light);
+}
 
-/* ===== RESPONSIVE DESIGN ===== */
+body.dark #sobre-mi {
+  background: var(--bg-dark);
+}
 
-/* Tablets y pantallas medianas */
+#proyectos {
+  background: #e9e9e9; 
+}
+
+body.dark #proyectos {
+  background: linear-gradient(
+    135deg,
+    var(--bg-dark-alt),
+    #0f0f1f
+  );
+}
+
+
+#contacto {
+  background: var(--bg-light);
+}
+
+body.dark #contacto {
+  background: var(--bg-dark);
+}
+
 @media (max-width: 1024px) {
 	.nav-container {
 		padding: var(--spacing-sm) var(--spacing-sm);
@@ -503,7 +493,6 @@ body.dark .badge:hover {
 	}
 }
 
-/* Tablets pequeñas */
 @media (max-width: 768px) {
 	.mobile-menu-toggle {
 		display: flex;
@@ -554,12 +543,10 @@ body.dark .badge:hover {
 
 }
 
-/* Modo oscuro para menú móvil */
 body.dark .nav-center {
 	background: var(--bg-dark-alt);
 }
 
-/* Móviles pequeños */
 @media (max-width: 480px) {
 	.nav-container {
 		padding: 0.75rem var(--spacing-xs);
@@ -598,7 +585,6 @@ body.dark .nav-center {
 	}
 }
 
-/* Overlay para menú móvil */
 .mobile-overlay {
 	display: none;
 	position: fixed;
@@ -617,7 +603,6 @@ body.dark .nav-center {
 	opacity: 1;
 }
 
-/* ===== UTILIDADES ===== */
 .container {
 	max-width: var(--breakpoint-wide);
 	margin: 0 auto;
