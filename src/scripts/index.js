@@ -1,9 +1,10 @@
 if (typeof window !== "undefined") {
   window.addEventListener("DOMContentLoaded", () => {
-    
+    console.log("DOM Cargado - Iniciando scripts");
     
     let lastScroll = 0;
 
+    // Elementos del DOM
     const navbar = document.getElementById("navbar");
     const themeToggle = document.getElementById("themeToggle");
     const navCenter = document.querySelector(".nav-center");
@@ -11,12 +12,16 @@ if (typeof window !== "undefined") {
     const mainLogo = document.getElementById("mainLogo");
     let isProgrammaticScroll = false;
 
+    console.log("Navbar:", navbar);
+    console.log("Theme Toggle:", themeToggle);
+    console.log("Nav Center:", navCenter);
 
     if (!navbar || !themeToggle) {
       console.error("No se encontraron elementos esenciales");
       return;
     }
 
+    // ===== MENÚ MÓVIL =====
     let mobileToggle = document.querySelector(".mobile-menu-toggle");
     if (!mobileToggle) {
       mobileToggle = document.createElement("button");
@@ -57,6 +62,10 @@ if (typeof window !== "undefined") {
     mobileToggle.addEventListener("click", toggleMobileMenu);
     overlay.addEventListener("click", toggleMobileMenu);
 
+    // ===== SMOOTH SCROLL - VERSIÓN MEJORADA =====
+    console.log("Configurando smooth scroll...");
+    
+    // Función de smooth scroll manual (fallback)
     function smoothScrollTo(targetPosition, duration = 800) {
       const startPosition = window.pageYOffset;
       const distance = targetPosition - startPosition;
@@ -67,6 +76,7 @@ if (typeof window !== "undefined") {
         const timeElapsed = currentTime - startTime;
         const progress = Math.min(timeElapsed / duration, 1);
         
+        // Easing function (ease-in-out)
         const ease = progress < 0.5
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -83,17 +93,24 @@ if (typeof window !== "undefined") {
       requestAnimationFrame(animation);
     }
 
+    // Detectar si el navegador soporta smooth scroll
     const supportsNativeSmoothScroll = 'scrollBehavior' in document.documentElement.style;
+    console.log("Soporte nativo de smooth scroll:", supportsNativeSmoothScroll);
     
+    // Seleccionar TODOS los enlaces que empiecen con #
     const allLinks = document.querySelectorAll('a[href^="#"]');
+    console.log("Enlaces encontrados:", allLinks.length);
     
     allLinks.forEach((link, index) => {
+      console.log(`Link ${index}:`, link.getAttribute("href"));
       
       link.addEventListener("click", function(e) {
         e.preventDefault();
+        console.log("Click en enlace:", this.getAttribute("href"));
         
         const targetId = this.getAttribute("href");
         
+        // Si es solo "#", ir al inicio
         if (targetId === "#") {
           isProgrammaticScroll = true;
           if (supportsNativeSmoothScroll) {
@@ -111,18 +128,25 @@ if (typeof window !== "undefined") {
         }
         
         const targetElement = document.querySelector(targetId);
+        console.log("Elemento objetivo:", targetElement);
         
         if (targetElement) {
+          // Cerrar menú móvil si está abierto
           if (navCenter?.classList.contains("active")) {
             toggleMobileMenu();
           }
           
+          // Activar bandera
           isProgrammaticScroll = true;
           
+          // Calcular posición
           const navbarHeight = navbar.offsetHeight;
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
           
+          console.log("Scrolling a:", offsetPosition);
+          
+          // Usar scroll nativo o fallback
           if (supportsNativeSmoothScroll) {
             window.scrollTo({
               top: offsetPosition,
@@ -141,6 +165,7 @@ if (typeof window !== "undefined") {
       });
     });
 
+    // ===== SCROLL SHOW/HIDE NAVBAR =====
     let ticking = false;
     
     const handleScroll = () => {
@@ -169,10 +194,11 @@ if (typeof window !== "undefined") {
       }
     });
 
+    // ===== DARK MODE TOGGLE =====
     const updateThemeIcon = (isDark) => {
       themeToggle.innerHTML = `
         <img 
-          src="${isDark ? '/images/sun.png' : '/images/moon-svgrepo-com.svg'}" 
+          src="${isDark ? '/images/sun.png' : '/images/moon.svg'}" 
           alt="${isDark ? 'Modo claro' : 'Modo oscuro'}"
           class="theme-icon"
         />
@@ -191,8 +217,8 @@ if (typeof window !== "undefined") {
 
       setTimeout(() => {
         mainLogo.src = isDark
-          ? "/images/Logo-Light.png"
-          : "/images/Logo-Dark.png";
+          ? "/images/Logo-light.webp"
+          : "/images/Logo-dark.webp";
 
         mainLogo.style.opacity = "1";
       }, 100);
@@ -206,6 +232,7 @@ if (typeof window !== "undefined") {
       updateLogo(isDark);
     });
 
+    // Cargar tema guardado
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     
@@ -218,6 +245,7 @@ if (typeof window !== "undefined") {
       updateLogo(false);
     }
 
+    // Escuchar cambios del sistema
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
       if (!localStorage.getItem("theme")) {
         if (e.matches) {
@@ -232,6 +260,7 @@ if (typeof window !== "undefined") {
       }
     });
 
+    // ===== LANGUAGE SELECT =====
     if (languageSelect) {
       const savedLang = localStorage.getItem("language") || "es";
       languageSelect.value = savedLang;
@@ -239,9 +268,11 @@ if (typeof window !== "undefined") {
       languageSelect.addEventListener("change", (e) => {
         const selectedLang = e.target.value;
         localStorage.setItem("language", selectedLang);
+        console.log(`Idioma cambiado a: ${selectedLang}`);
       });
     }
 
+    // ===== CERRAR MENÚ MÓVIL AL REDIMENSIONAR =====
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
@@ -252,9 +283,136 @@ if (typeof window !== "undefined") {
       }, 250);
     });
 
+    // ===== ANIMACIÓN DE ENTRADA =====
     setTimeout(() => {
       navbar.classList.add("loaded");
     }, 100);
+
+    console.log("Todos los scripts inicializados correctamente");
+
+    // ===== GALERÍA DE IMÁGENES (LIGHTBOX) =====
+    const galleryModal = document.getElementById("gallery-modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalClose = document.querySelector(".modal-close");
+    const modalPrev = document.querySelector(".modal-prev");
+    const modalNext = document.querySelector(".modal-next");
+    const currentImageSpan = document.getElementById("current-image");
+    const totalImagesSpan = document.getElementById("total-images");
+
+    let currentGalleryImages = [];
+    let currentImageIndex = 0;
+
+    // Función para abrir la galería
+    function openGallery(projectId) {
+      const projectCard = document.querySelector(`[data-project="${projectId}"]`);
+      const galleryImages = projectCard.querySelectorAll(".project-gallery img");
+      
+      if (galleryImages.length === 0) return;
+
+      // Convertir NodeList a array de URLs
+      currentGalleryImages = Array.from(galleryImages).map(img => ({
+        src: img.src,
+        alt: img.alt
+      }));
+      
+      currentImageIndex = 0;
+      
+      // Mostrar modal
+      galleryModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+      
+      // Actualizar imagen y contador
+      updateGalleryImage();
+      
+      console.log(`Galería abierta: ${projectId} con ${currentGalleryImages.length} imágenes`);
+    }
+
+    // Función para actualizar la imagen mostrada
+    function updateGalleryImage() {
+      const currentImg = currentGalleryImages[currentImageIndex];
+      modalImage.src = currentImg.src;
+      modalImage.alt = currentImg.alt;
+      
+      currentImageSpan.textContent = currentImageIndex + 1;
+      totalImagesSpan.textContent = currentGalleryImages.length;
+      
+      // Ocultar flechas si solo hay 1 imagen
+      if (currentGalleryImages.length === 1) {
+        modalPrev.classList.add("hidden");
+        modalNext.classList.add("hidden");
+      } else {
+        modalPrev.classList.remove("hidden");
+        modalNext.classList.remove("hidden");
+      }
+    }
+
+    // Función para cerrar la galería
+    function closeGallery() {
+      galleryModal.classList.remove("active");
+      document.body.style.overflow = "";
+      currentGalleryImages = [];
+      currentImageIndex = 0;
+    }
+
+    // Función para imagen siguiente
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+      updateGalleryImage();
+    }
+
+    // Función para imagen anterior
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+      updateGalleryImage();
+    }
+
+    // Event listeners para los botones de galería
+    const galleryButtons = document.querySelectorAll("[data-gallery]");
+    galleryButtons.forEach(button => {
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        const projectId = button.getAttribute("data-gallery");
+        openGallery(projectId);
+      });
+    });
+
+    // Event listeners del modal
+    if (modalClose) {
+      modalClose.addEventListener("click", closeGallery);
+    }
+
+    if (modalPrev) {
+      modalPrev.addEventListener("click", prevImage);
+    }
+
+    if (modalNext) {
+      modalNext.addEventListener("click", nextImage);
+    }
+
+    // Cerrar con ESC o click fuera de la imagen
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && galleryModal.classList.contains("active")) {
+        closeGallery();
+      }
+    });
+
+    // Navegar con flechas del teclado
+    document.addEventListener("keydown", (e) => {
+      if (!galleryModal.classList.contains("active")) return;
+      
+      if (e.key === "ArrowRight") {
+        nextImage();
+      } else if (e.key === "ArrowLeft") {
+        prevImage();
+      }
+    });
+
+    // Cerrar al hacer click en el fondo
+    galleryModal?.addEventListener("click", (e) => {
+      if (e.target === galleryModal) {
+        closeGallery();
+      }
+    });
 
   });
 }
