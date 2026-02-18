@@ -48,8 +48,8 @@ if (typeof window !== "undefined") {
               "description": "Desarrollo de una solución integral para la <strong>UPTP \"JJ Montilla\"</strong> destinada a automatizar los procesos de la Unidad de Bienestar Estudiantil. El sistema digitaliza la gestión y el control de beneficios, eliminando la dependencia de registros manuales.<br /><br />Implementado bajo la metodología <strong>Métrica v3</strong>, garantizando un ciclo de vida robusto."
             },
             "item2": {
-              "title": "Sistema de Gestión Académica",
-              "description": "Plataforma Full-Stack diseñada para digitalizar y optimizar la gestión de servicios estudiantiles."
+              "title": "Portafolio Personal (Este sitio)",
+              "description": "Desarrollo de un portafolio personal utilizando <strong>Astro</strong> para mostrar mis habilidades y proyectos. El sitio es completamente responsive, con un diseño moderno y optimizado para SEO."
             }
           },
 
@@ -118,8 +118,8 @@ if (typeof window !== "undefined") {
               "description": "Development of a comprehensive solution for <strong>UPTP \"JJ Montilla\"</strong> designed to automate the Student Wellness Unit processes. The system digitalizes benefit management and control, eliminating manual paper records.<br /><br />Implemented using <strong>Métrica v3</strong> methodology, ensuring a robust development lifecycle."
             },
             "item2": {
-              "title": "Academic Management System",
-              "description": "Full-Stack platform designed to digitalize and optimize the management of student services."
+              "title": "Personal Portfolio (This site)",
+              "description": "Personal portfolio development using <strong>Astro</strong> to showcase my skills and projects. The site is fully responsive, with a modern design and SEO optimization."
             }
           },
 
@@ -494,7 +494,7 @@ if (typeof window !== "undefined") {
     const updateThemeIcon = (isDark) => {
       themeToggle.innerHTML = `
         <img 
-          src="${isDark ? '/images/sun.png' : '/images/moon.svg'}" 
+          src="${isDark ? '/images/sun.webp' : '/images/moon.webp'}" 
           alt="${isDark ? 'Modo claro' : 'Modo oscuro'}"
           class="theme-icon"
         />
