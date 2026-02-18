@@ -8,7 +8,6 @@ if (typeof window !== "undefined") {
     const navbar = document.getElementById("navbar");
     const themeToggle = document.getElementById("themeToggle");
     const navCenter = document.querySelector(".nav-center");
-    const languageSelect = document.getElementById("languageSelect");
     const mainLogo = document.getElementById("mainLogo");
     let isProgrammaticScroll = false;
 
@@ -19,6 +18,303 @@ if (typeof window !== "undefined") {
     if (!navbar || !themeToggle) {
       console.error("No se encontraron elementos esenciales");
       return;
+    }
+
+        // ===== CONFIGURACIÓN DE I18NEXT =====
+    const resources = {
+      es: {
+        translation: {
+          "header": {
+            "hero-title": {
+              "prefix": "Soy",
+              "role": "Desarrollador | Fullstack"
+            },
+            "hero-description": "Mi superpoder es convertir código en soluciones reales. Desarrollo experiencias Full-Stack eficientes, modernas y escalables.",
+            "hero-btn": "Conóceme"
+          },
+
+          "about": {
+            "title": "Sobre mí",
+            "intro": "Mi nombre es <strong>Enmanuel Medina</strong>. Fui mordido por una araña desarrolladora y desde hace un año descubrí que mi verdadera habilidad es transformar ideas en código.",
+            "description": "Como desarrollador <strong>Full-Stack</strong>, tejo soluciones entre el frontend y el backend, construyendo experiencias digitales modernas, rápidas y con impacto real.",
+            "education": "Me formé como <strong>Técnico en Informática</strong> y complemento mi aprendizaje de manera autodidacta, enfrentando nuevos retos y tecnologías en cada proyecto."
+          },
+
+          "projects": {
+            "section_title": "Proyectos",
+            "btn_images": "Ver imágenes",
+            "item1": {
+              "title": "Bienestar Estudiantil (Gestión Universitaria)",
+              "description": "Desarrollo de una solución integral para la <strong>UPTP \"JJ Montilla\"</strong> destinada a automatizar los procesos de la Unidad de Bienestar Estudiantil. El sistema digitaliza la gestión y el control de beneficios, eliminando la dependencia de registros manuales.<br /><br />Implementado bajo la metodología <strong>Métrica v3</strong>, garantizando un ciclo de vida robusto."
+            },
+            "item2": {
+              "title": "Sistema de Gestión Académica",
+              "description": "Plataforma Full-Stack diseñada para digitalizar y optimizar la gestión de servicios estudiantiles."
+            }
+          },
+
+          "contact": {
+            "title": "Contacto",
+            "description": "¿Tienes un proyecto en mente o quieres charlar sobre tecnología? ¡Dispárame una telaraña! Estoy disponible para nuevas oportunidades.",
+            "email_label": "Email",
+            "copy_status": "¡Copiado!",
+            "sending": "Lanzando telaraña...",
+            "form": {
+              "name": "Nombre",
+              "message": "Mensaje",
+              "button": "Enviar Mensaje"
+            },
+            "placeholders": {
+              "name": "Tu nombre",
+              "message": "¿En qué puedo ayudarte?"
+            }
+          },
+
+          "nav": {
+            "home": "Inicio",
+            "about-me": "Sobre Mí",
+            "projects": "Proyectos",
+            "contact": "Contacto"
+          },
+
+          "footer": {
+            "tagline": "Construyendo el futuro digital, un bit a la vez. 🕷️",
+            "nav_title": "Navegación",
+            "copy": "&copy; 2024 EnmaDev. Hecho con ❤️ y mucha cafeína."
+          },
+
+          "alerts": {
+            "success_title": "¡Mensaje Enviado! 🕷️",
+            "success_body": "Tu mensaje ha sido enviado exitosamente. ¡Nos vemos en la telaraña!",
+            "error_title": "¡Ups! Algo salió mal",
+            "error_body": "Hubo un problema. Inténtalo de nuevo.",
+            "close_btn": "Cerrar" // <-- Agregar esta
+          }
+        }
+      },
+      en: {
+        translation: {
+          "header": {
+            "hero-title": {
+              "prefix": "I'm",
+              "role": "Fullstack Developer"
+            },
+            "hero-description": "My superpower is turning code into real solutions. I develop efficient, modern, and scalable Full-Stack experiences.",
+            "hero-btn": "Get to know me"
+          },
+
+          "about": {
+            "title": "About me",
+            "intro": "My name is <strong>Enmanuel Medina</strong>. I was bitten by a developer spider, and a year ago I discovered my true ability is transforming ideas into code.",
+            "description": "As a <strong>Full-Stack</strong> developer, I weave solutions between frontend and backend, building modern, fast digital experiences with real impact.",
+            "education": "I trained as an <strong>IT Technician</strong> and complement my learning as an autodidact, facing new challenges and technologies in every project."
+          },
+
+          "projects": {
+            "section_title": "Projects",
+            "btn_images": "View Images",
+            "item1": {
+              "title": "Student Wellness (University Management)",
+              "description": "Development of a comprehensive solution for <strong>UPTP \"JJ Montilla\"</strong> designed to automate the Student Wellness Unit processes. The system digitalizes benefit management and control, eliminating manual paper records.<br /><br />Implemented using <strong>Métrica v3</strong> methodology, ensuring a robust development lifecycle."
+            },
+            "item2": {
+              "title": "Academic Management System",
+              "description": "Full-Stack platform designed to digitalize and optimize the management of student services."
+            }
+          },
+
+          "contact": {
+            "title": "Contact",
+            "description": "Have a project in mind or want to chat about tech? Shoot me a web! I'm available for new opportunities.",
+            "email_label": "Email",
+            "copy_status": "Copied!",
+            "sending": "Shooting web...",
+            "form": {
+              "name": "Name",
+              "message": "Message",
+              "button": "Send Message"
+            },
+            "placeholders": {
+              "name": "Your name",
+              "message": "How can I help you?"
+            }
+          },
+
+          "nav": {
+            "home": "Home",
+            "about-me": "About Me",
+            "projects": "Projects",
+            "contact": "Contact"
+          },
+          "footer": {
+            "tagline": "Building the digital future, one bit at a time. 🕷️",
+            "nav_title": "Navigation",
+            "copy": "&copy; 2024 EnmaDev. Made with ❤️ and lots of caffeine."
+          },
+          
+          "alerts": {
+            "success_title": "Message Sent! 🕷️",
+            "success_body": "Your message has been sent successfully. See you in the web!",
+            "error_title": "Oops! Something went wrong",
+            "error_body": "There was a problem. Please try again.",
+            "close_btn": "Close" // <-- Agregar esta
+          }
+        }
+      }
+    };
+
+    // Inicializar i18next
+    i18next
+      .use(i18nextBrowserLanguageDetector) // Detecta el idioma del navegador automáticamente
+      .init({
+        resources,
+        fallbackLng: "es", // Idioma por defecto
+        debug: false
+      }, function(err, t) {
+        updateContent();
+      });
+
+    // Función para actualizar todos los textos
+    function updateContent() {
+      // Traducir textos normales
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.innerHTML = i18next.t(el.getAttribute('data-i18n'));
+      });
+
+      // Traducir placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = i18next.t(el.getAttribute('data-i18n-placeholder'));
+      });
+    }
+
+    // Evento para el select de idioma
+    const languageSelect = document.getElementById("languageSelect");
+    if (languageSelect) {
+      languageSelect.addEventListener("change", (e) => {
+        i18next.changeLanguage(e.target.value, () => {
+          updateContent();
+        });
+      });
+    }
+
+    // ===== CUSTOM ALERT SPIDER-VERSE =====
+    function showCustomAlert(type, title, message) {
+      const alertHTML = `
+        <div class="custom-alert" id="custom-alert">
+          <div class="alert-box">
+            <div class="alert-icon">
+              ${type === 'success' ? `
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              ` : `
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"/>
+                  <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+              `}
+            </div>
+
+            <h2 class="alert-title">${title}</h2>
+            <p class="alert-message">${message}</p>
+
+            <button class="alert-btn" onclick="closeCustomAlert()">
+              ${i18next.t('alerts.close_btn')}
+            </button>
+
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', alertHTML);
+      requestAnimationFrame(() => {
+        document.getElementById('custom-alert').classList.add('active');
+      });
+    }
+
+    window.closeCustomAlert = function () {
+      const alert = document.getElementById('custom-alert');
+      if (alert) {
+        alert.classList.remove('active');
+        setTimeout(() => alert.remove(), 200);
+      }
+    };
+
+    // ===== LÓGICA DE COPIAR EMAIL AL PORTAPAPELES =====
+    const copyEmailCard = document.getElementById("copy-email");
+    const copyStatus = document.getElementById("copy-status");
+
+    if (copyEmailCard) {
+      copyEmailCard.addEventListener("click", () => {
+        const email = copyEmailCard.getAttribute("data-email");
+
+        navigator.clipboard.writeText(email).then(() => {
+          // Mostrar feedback visual
+          copyStatus.classList.add("show");
+
+          // Cambiar el estilo de la tarjeta momentáneamente
+          copyEmailCard.style.borderColor = "var(--color-primary-glow)";
+          
+          // Ocultar el aviso después de 2 segundos
+          setTimeout(() => {
+            copyStatus.classList.remove("show");
+            copyEmailCard.style.borderColor = "";
+          }, 2000);
+        }).catch(err => {
+          console.error('Error al copiar: ', err);
+        });
+      });
+    }
+
+
+    // ===== FORMULARIO DE CONTACTO =====
+    const contactForm = document.getElementById("form-contacto");
+    if (contactForm) {
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+
+        submitBtn.disabled = true;
+        // Aquí usamos i18next para el texto de carga (Asegúrate de tener "sending" en tu JSON)
+        submitBtn.innerHTML = i18next.t('contact.sending') || 'Lanzando telaraña...';
+
+        try {
+          const response = await fetch(contactForm.action, {
+            method: "POST",
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (response.ok) {
+            // ALERTA DE ÉXITO TRADUCIDA
+            showCustomAlert(
+              'success',
+              i18next.t('alerts.success_title'),
+              i18next.t('alerts.success_body')
+            );
+            contactForm.reset();
+          } else {
+            // ALERTA DE ERROR DEL SERVIDOR TRADUCIDA
+            showCustomAlert(
+              'error',
+              i18next.t('alerts.error_title'),
+              i18next.t('alerts.error_body')
+            );
+          }
+        } catch (error) {
+          // ALERTA DE ERROR DE CONEXIÓN
+          showCustomAlert(
+            'error',
+            i18next.t('alerts.error_title'),
+            i18next.t('alerts.error_body')
+          );
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      });
     }
 
     // ===== MENÚ MÓVIL =====
@@ -212,15 +508,18 @@ if (typeof window !== "undefined") {
 
     const updateLogo = (isDark) => {
       if (!mainLogo) return;
+      const footerLogo = document.getElementById("footerLogo");
 
       mainLogo.style.opacity = "0";
+      if(footerLogo) footerLogo.style.opacity = "0";
 
       setTimeout(() => {
-        mainLogo.src = isDark
-          ? "/images/Logo-light.webp"
-          : "/images/Logo-dark.webp";
+        const logoSrc = isDark ? "/images/Logo-light.webp" : "/images/Logo-dark.webp";
+        mainLogo.src = logoSrc
+          if(footerLogo) footerLogo.src = logoSrc;
 
         mainLogo.style.opacity = "1";
+        if(footerLogo) footerLogo.style.opacity = "1";
       }, 100);
     };
 

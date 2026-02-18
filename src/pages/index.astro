@@ -17,14 +17,15 @@ import "../styles/index.css";
       href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap"
       rel="stylesheet"
     />
-
-    <meta
-      name="description"
-      content="Portfolio de EnmaDev - Desarrollador Web"
-    />
+    <script src="https://unpkg.com/i18next@23.10.0/dist/umd/i18next.min.js"
+    ></script>
+    <script
+      src="https://unpkg.com/i18next-browser-languagedetector@7.2.0/dist/umd/i18nextBrowserLanguageDetector.min.js"
+    ></script>
+    <meta name="description" content="EnmaDev - Desarrollador Fullstack" />
     <meta name="theme-color" content="#0b7a75" />
 
-    <title>EnmaDev | Portfolio</title>
+    <title>EnmaDev</title>
   </head>
 
   <body>
@@ -48,10 +49,10 @@ import "../styles/index.css";
           </a>
         </div>
         <ul class="nav-center">
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#sobre-mi">Sobre mí</a></li>
-          <li><a href="#proyectos">Proyectos</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+          <li><a href="#sobre-mi" data-i18n="nav.about-me">Sobre mí</a></li>
+          <li><a href="#proyectos" data-i18n="nav.projects">Proyectos</a></li>
+          <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
         </ul>
 
         <div class="nav-right">
@@ -71,64 +72,118 @@ import "../styles/index.css";
       <div class="hero-overlay"></div>
 
       <div class="hero-content">
-        <h1>
-          Soy <span>Enmanuel</span>
+        <h1 class="hero-title">
+          <span data-i18n="header.hero-title.prefix">Soy</span> <span>Enmanuel</span>
           <span
             class="accent"
             style="display: block; font-size: 1.75rem; margin: 0; line-height: 1;"
-            >Desarrollador | Fullstack</span
-          >
+            data-i18n="header.hero-title.role">Desarrollador | Fullstack</span>
         </h1>
 
-        <p>
+        <p data-i18n="header.hero-description">
           Mi superpoder es convertir código en soluciones reales. Desarrollo
           experiencias Full-Stack eficientes, modernas y escalables.
         </p>
 
-        <a href="#sobre-mi" class="hero-btn"> Conóceme </a>
+        <a href="#sobre-mi" class="hero-btn" data-i18n="header.hero-btn"> Conóceme </a>
       </div>
     </header>
 
     <main id="sobre-mi" class="main-section">
       <div class="sobre-mi container">
-        <h2 class="section-title">Sobre mí</h2>
+        <h2 class="section-title" data-i18n="about.title">Sobre mí</h2>
 
         <p class="sobre-text">
-          Mi nombre es <strong>Enmanuel Medina</strong>. Fui mordido por una
-          araña desarrolladora y desde hace un año descubrí que mi verdadera
-          habilidad es transformar ideas en código.
+          <span data-i18n="about.intro">Mi nombre es <strong>Enmanuel Medina</strong>. Fui mordido por una araña desarrolladora y desde hace un año descubrí que mi verdadera habilidad es transformar ideas en código.</span>
           <br /><br />
-          Como desarrollador <strong>Full-Stack</strong>, tejo soluciones entre
-          el frontend y el backend, construyendo experiencias digitales
-          modernas, rápidas y con impacto real.
+          <span data-i18n="about.description">Como desarrollador <strong>Full-Stack</strong>, tejo soluciones entre el frontend y el backend, construyendo experiencias digitales modernas, rápidas y con impacto real.</span>
           <br /><br />
-          Me formé como <strong>Técnico en Informática</strong> y complemento mi aprendizaje
-          de manera autodidacta, enfrentando nuevos retos y tecnologías en cada proyecto.
+          <span data-i18n="about.education">Me formé como <strong>Técnico en Informática</strong> y complemento mi aprendizaje de manera autodidacta, enfrentando nuevos retos y tecnologías en cada proyecto.</span>
         </p>
 
-        <div class="badges">
-          <span class="badge">HTML</span>
-          <span class="badge">CSS</span>
-          <span class="badge">JavaScript</span>
-          <span class="badge">PHP</span>
-          <span class="badge">Laravel</span>
-          <span class="badge">Livewire</span>
-          <span class="badge">Astro</span>
-          <span class="badge">MySQL</span>
-          <span class="badge">Docker</span>
-          <span class="badge">Github</span>
+        <div class="tech-selector">
+          <button class="tech-btn badge" data-tech="html">
+            <img src="/images/html.png" alt="HTML" />
+            <span>HTML</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="astro">
+            <img src="/images/astro.png" alt="Astro" />
+            <span>Astro</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="css">
+            <img src="/images/css.png" alt="CSS" />
+            <span>CSS</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="bootstrap">
+            <img src="/images/bootstrap.svg" alt="Bootstrap" />
+            <span>Bootstrap</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="javascript">
+            <img
+              src="/images/javascript.png"
+              alt="JavaScript"
+              style="border-radius: 5px;"
+            />
+            <span>JavaScript</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="php">
+            <img src="/images/php.webp" alt="PHP" />
+            <span>PHP</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="laravel">
+            <img src="/images/laravel.webp" alt="Laravel" />
+            <span>Laravel</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="livewire">
+            <img src="/images/livewire.svg" alt="Livewire" />
+            <span>Livewire</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="mysql">
+            <img
+              src="/images/mysql.webp"
+              alt="MySQL"
+              style="border-radius: 5px;"
+            />
+            <span>MySQL</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="docker">
+            <img src="/images/docker.png" alt="Docker" />
+            <span>Docker</span>
+          </button>
+
+          <button class="tech-btn badge" data-tech="github">
+            <img
+              src="/images/github.webp"
+              alt="GitHub"
+              style="border-radius: 5px;"
+            />
+            <span>GitHub</span>
+          </button>
         </div>
       </div>
     </main>
 
     <section id="proyectos">
       <div class="container">
-        <h2 class="section-title">Proyectos</h2>
+        <h2 class="section-title" data-i18n="projects.section_title">Proyectos</h2>
         <div class="projects-grid">
           <!-- Proyecto 1 -->
           <article class="project-card" data-project="proyecto1">
             <div class="project-image">
-              <img src="/images/be1.webp" alt="Bienestar Estudiantil" />
+              <img
+                src="/images/be1.webp"
+                alt="Bienestar Estudiantil"
+                title="Landing Page"
+              />
               <div class="project-overlay">
                 <div class="project-links">
                   <button class="btn-project" data-gallery="proyecto1">
@@ -144,7 +199,7 @@ import "../styles/index.css";
                         d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
                         clip-rule="evenodd"></path>
                     </svg>
-                    Ver imágenes
+                    <span data-i18n="projects.btn_images">Ver imágenes</span>
                   </button>
                   <a
                     href="https://github.com/EnmaLv/SisgestiondeInventario"
@@ -168,8 +223,8 @@ import "../styles/index.css";
               </div>
             </div>
             <div class="project-info">
-              <h3>Bienestar Estudiantil (Gestión Universitaria)</h3>
-              <p>
+              <h3 data-i18n="projects.item1.title">Bienestar Estudiantil (Gestión Universitaria)</h3>
+              <p data-i18n="projects.item1.description">
                 Desarrollo de una solución integral para la <strong
                   >UPTP "JJ Montilla"</strong
                 > destinada a automatizar los procesos de la Unidad de Bienestar Estudiantil.
@@ -196,30 +251,37 @@ import "../styles/index.css";
               <img
                 src="/images/be1.webp"
                 alt="Bienestar Estudiantil - Vista 1"
+                title="Landing Page"
               />
               <img
                 src="/images/be2.webp"
                 alt="Bienestar Estudiantil - Vista 2"
+                title="Login"
               />
               <img
                 src="/images/be3.webp"
                 alt="Bienestar Estudiantil - Vista 3"
+                title="Dashboard"
               />
               <img
                 src="/images/be4.webp"
                 alt="Bienestar Estudiantil - Vista 4"
+                title="Modulo de Gestión 1"
               />
               <img
                 src="/images/be5.webp"
                 alt="Bienestar Estudiantil - Vista 5"
+                title="Modulo de Gestión 2"
               />
               <img
                 src="/images/be6.webp"
                 alt="Bienestar Estudiantil - Vista 6"
+                title="Modulo de Gestión 3"
               />
               <img
                 src="/images/be7.webp"
                 alt="Bienestar Estudiantil - Vista 7"
+                title="Modulo de Gestión 4"
               />
             </div>
           </article>
@@ -231,61 +293,20 @@ import "../styles/index.css";
               <div class="project-overlay">
                 <div class="project-links">
                   <button class="btn-project" data-gallery="proyecto2">
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                      <path
-                        fill-rule="evenodd"
-                        d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                    Ver imágenes
+                    <span data-i18n="projects.btn_images">Ver imágenes</span>
                   </button>
-                  <a
-                    href="https://github.com"
-                    class="btn-project secondary"
-                    target="_blank"
-                  >
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                    GitHub
-                  </a>
+                  <a href="https://github.com" class="btn-project secondary" target="_blank">GitHub</a>
                 </div>
               </div>
             </div>
             <div class="project-info">
-              <h3>Sistema de Gestión Académica</h3>
-              <p>
-                Plataforma Full-Stack diseñada para digitalizar y optimizar la
-                gestión de servicios estudiantiles.
+              <h3 data-i18n="projects.item2.title">Sistema de Gestión Académica</h3>
+              <p data-i18n="projects.item2.description">
+                Plataforma Full-Stack diseñada para digitalizar y optimizar la gestión de servicios estudiantiles.
               </p>
               <div class="project-tags">
-                <span>HTML5</span>
-                <span>Bootstrap</span>
-                <span>JavaScript</span>
-                <span>PHP</span>
-                <span>Laravel</span>
-                <span>MySQL</span>
+                <span>HTML5</span> <span>Bootstrap</span> <span>JavaScript</span> <span>PHP</span> <span>Laravel</span> <span>MySQL</span>
               </div>
-            </div>
-            <!-- Imágenes para la galería -->
-            <div class="project-gallery" style="display: none;">
-              <img src="/images/be1.webp" alt="Proyecto 2 - Vista 1" />
-              <img src="/images/be1.webp" alt="Proyecto 2 - Vista 2" />
-              <img src="/images/be1.webp" alt="Proyecto 2 - Vista 3" />
             </div>
           </article>
         </div>
@@ -294,16 +315,88 @@ import "../styles/index.css";
 
     <section id="contacto">
       <div class="container">
-        <h2 class="section-title">Contacto</h2>
+        <h2 class="section-title" data-i18n="contact.title">Contacto</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <p class="contact-desc" data-i18n="contact.description">
+              ¿Tienes un proyecto en mente o quieres charlar sobre tecnología?
+              ¡Dispárame una telaraña! Estoy disponible para nuevas oportunidades.
+            </p>
+
+            <div class="contact-cards">
+              <div class="c-card" id="copy-email" data-email="medina.enma1234@gmail.com" style="cursor: pointer;">
+                <div class="c-icon">📩</div>
+                <div>
+                  <h4 data-i18n="contact.email_label">Email</h4>
+                  <p id="email-text">medina.enma1234@gmail.com</p>
+                </div>
+                <span class="copy-status" id="copy-status" data-i18n="contact.copy_status">¡Copiado!</span>
+              </div>
+
+              <a href="https://github.com/EnmaLv" target="_blank" class="c-card">
+                <div class="c-icon">💻</div>
+                <div>
+                  <h4>GitHub</h4>
+                  <p>@EnmaLv</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <form action="https://formspree.io/f/mldjaroy" method="POST" class="contact-form" id="form-contacto">
+            <div class="form-group">
+              <label for="nombre" data-i18n="contact.form.name">Nombre</label>
+              <input type="text" id="nombre" name="nombre" data-i18n-placeholder="contact.placeholders.name" placeholder="Tu nombre" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje" data-i18n="contact.form.message">Mensaje</label>
+              <textarea id="mensaje" name="mensaje" rows="5" data-i18n-placeholder="contact.placeholders.message" placeholder="¿En qué puedo ayudarte?" required></textarea>
+            </div>
+
+            <button type="submit" class="badge" data-i18n="contact.form.button">
+              Enviar Mensaje
+              <span class="btn-glow"></span>
+            </button>
+          </form>
+        </div>
       </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <p>&copy; 2024 EnmaDev. Todos los derechos reservados.</p>
+    <footer class="main-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <img src="/images/Logo-light.webp" alt="Logo" class="logo" id="footerLogo" />
+            <span class="brand-title">Enma<span class="brand-subtitle">Dev</span></span>
+          </div>
+          <p class="footer-tagline" data-i18n="footer.tagline">
+            Construyendo el futuro digital, un bit a la vez. 🕷️
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <h4 data-i18n="footer.nav_title">Navegación</h4>
+          <ul>
+            <li><a href="#inicio" data-i18n="nav.home">Inicio</a></li>
+            <li><a href="#sobre-mi" data-i18n="nav.about-me">Sobre Mí</a></li>
+            <li><a href="#proyectos" data-i18n="nav.projects">Proyectos</a></li>
+            <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <p data-i18n="footer.copy">&copy; 2024 EnmaDev. Hecho con ❤️ y mucha cafeína.</p>
+        </div>
       </div>
     </footer>
-
     <!-- Modal Lightbox -->
     <div id="gallery-modal" class="gallery-modal">
       <button class="modal-close" aria-label="Cerrar galería">
@@ -343,6 +436,5 @@ import "../styles/index.css";
     <script>
       import "../scripts/index.js";
     </script>
-
   </body>
 </html>
