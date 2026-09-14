@@ -1,0 +1,63 @@
+---
+const skills = [
+  'HTML', 'CSS', 'JavaScript', 'TypeScript',
+  'React', 'Astro', 'Tailwind CSS', 'Vite',
+  'Flutter', 'Dart', 'SQLite', 'Firebase',
+  'Alpine', 'Livewire', 'MySQL', 'Laravel',
+  'PHP', 'Node.js', 'Render', 'Aiven',
+  'Docker', 'GitHub', 'Git', 'REST APIs',
+]
+---
+<section id="about" style="padding: clamp(5rem, 10vw, 8rem) 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <div>
+        <div class="reveal" style="margin-bottom: 1.5rem;">
+          <span class="section-label" data-es="El Origen" data-en="The Origin">El Origen</span>
+          <span class="accent-line" style="margin-top: 0.75rem;"></span>
+        </div>
+
+        <h2
+          class="reveal reveal-delay-1"
+          style="font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; letter-spacing: -0.02em; margin: 0 0 2rem; line-height: 1.1;"
+          data-es="Sobre Mí"
+          data-en="About Me"
+        >
+          Sobre Mí
+        </h2>
+
+        <div class="reveal reveal-delay-2" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <p style="font-size: 1.05rem; line-height: 1.8; font-weight: 500;" data-es="Mi nombre es Enmanuel Medina. Fui mordido por una araña desarrolladora hace más de 2 años y descubrí que mi verdadero poder es transformar ideas complejas en código escalable." data-en="I'm Enmanuel Medina — bitten by a developer spider 2+ years ago, I found my true skill in turning complex ideas into scalable code.">
+            Mi nombre es Enmanuel Medina. Fui mordido por una araña desarrolladora hace más de 2 años y descubrí que mi verdadero poder es transformar ideas complejas en código escalable.
+          </p>
+          <p class="text-muted" style="font-size: 0.9rem; line-height: 1.85;" data-es="Como desarrollador Fullstack, tejo soluciones sólidas entre el frontend y el backend. Me he formado como Técnico en Informática y complemento mi ruta como desarrollador autodidacta e inquieto." data-en="As a Fullstack developer, I weave solid solutions between frontend and backend. Trained as an IT Technician and continuous self-taught developer.">
+            Como desarrollador Fullstack, tejo soluciones sólidas entre el frontend y el backend. Me he formado como Técnico en Informática y complemento mi ruta como desarrollador autodidacta e inquieto.
+          </p>
+          <p class="text-muted" style="font-size: 0.9rem; line-height: 1.85;" data-es="Especializado en arquitecturas modernas: desde APIs RESTful en Laravel hasta aplicaciones reactivas con Astro/React y contenedores Docker." data-en="Specialized in modern architectures: from RESTful APIs in Laravel to reactive web apps with Astro/React and Docker containerization.">
+            Especializado en arquitecturas modernas: desde APIs RESTful en Laravel hasta aplicaciones reactivas con Astro/React y contenedores Docker.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="surface" style="border-radius: 1rem; padding: 2rem; position: sticky; top: 80px;">
+          <div style="margin-bottom: 1.5rem;">
+            <span class="section-label" data-es="Matriz Tecnica" data-en="Tech Matrix">Matriz Tecnica</span>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            {skills.map(skill => (
+              <span class="skill-badge">{skill}</span>
+            ))}
+          </div>
+
+          <div style="position: absolute; top: 1rem; right: 1rem; opacity: 0.3;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M0 10 L10 0 L20 10 L10 20 Z" stroke="var(--color-cyan)" stroke-width="1" fill="none" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
