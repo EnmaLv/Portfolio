@@ -32,13 +32,26 @@ const projects = [
     subtitle: 'Next.js 15 + Framer Motion',
     descES: 'Landing page para una institución bancaria agrícola en Venezuela. Incluye diseño de alta conversión, estimador interactivo de créditos y animaciones fluidas.',
     descEN: 'Agro-finance landing page for a new agricultural bank in Venezuela. Features interactive loan estimator and fluid animations.',
-    stack: ['Next.js', 'Tailwind', 'Framer Motion', 'TS'],
+    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
     gradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(10, 10, 15, 0.9) 60%)',
     accent: '#10b981',
     size: 'small',
     image: '/images/banagro.png',
     github: null, // Proyecto privado
-    }
+  },
+  {
+    id: 'scanner',
+    title: 'Portfolio',
+    subtitle: 'Astro + Tailwind',
+    descES: 'Portafolio web hiper-optimizado y herramientas de análisis visual con accesibilidad responsive y animaciones en CSS.',
+    descEN: 'Hyper-optimized portfolio website and visual performance tools with responsive design.',
+    stack: ['Astro', 'TypeScript', 'Tailwind'],
+    gradient: 'linear-gradient(135deg, rgba(255,0,60,0.4) 0%, rgba(10,10,15,0.9) 60%)',
+    accent: 'var(--color-crimson)',
+    size: 'small',
+    image: '/images/portfolio.png',
+    github: 'https://github.com/EnmaLv/Portfolio',
+  }, 
 ]
 ---
 <section id="projects" style="padding: clamp(5rem, 10vw, 8rem) 0;">
@@ -56,12 +69,12 @@ const projects = [
     </div>
 
     <!-- Bento Grid -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((p, i) => (
-        <div class={`reveal reveal-delay-${i + 1}`} style={p.size === 'large' ? 'grid-column: span 2;' : ''}>
+        <div class={`reveal reveal-delay-${i + 1} ${p.size === 'large' ? 'md:col-span-2' : ''}`}>
           <div
             class="project-card surface"
-            style={`min-height: ${p.size === 'large' ? '380px' : '280px'}; display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-radius: 1rem; overflow: hidden;`}
+            style={`min-height: ${p.size === 'large' ? '340px' : '280px'}; display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-radius: 1rem; overflow: hidden;`}
           >
             <!-- Background Gradient fallback -->
             <div style={`position: absolute; inset: 0; background: ${p.gradient}; border-radius: 1rem;`}></div>

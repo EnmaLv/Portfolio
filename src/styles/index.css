@@ -525,3 +525,30 @@ body {
 [data-theme="light"] .footer-icon {
   color: rgba(0, 0, 0, 0.45);
 }
+
+@media (max-width: 767px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .hero-title {
+    font-size: clamp(2.2rem, 10vw, 3.5rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .reveal > .btn-crimson,
+  .reveal > .btn-secondary-custom {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .project-card {
+    min-height: 260px;
+    width: 100%;
+  }
+
+  .project-card .overlay {
+    padding: 1.25rem;
+    text-align: center;
+  }
+}
