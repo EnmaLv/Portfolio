@@ -1,20 +1,25 @@
 ---
+const INITIAL_COUNT = 3;
+
 const projects = [
-    {
-    id: 'bienestar',
+  {
+    id: 'siga',
+    slug: 'siga-bienestar',
     title: 'SIGA - Bienestar Estudiantil',
     subtitle: 'Intranet Modular Universitaria',
     descES: 'Ecosistema centralizado que unifica 5 áreas críticas (Comedor, Salud, Deportes, Becas y Transporte) con control de inventario en tiempo real, trazabilidad por auditoría y seguridad RBAC.',
     descEN: 'Centralized ecosystem unifying 5 core areas (Dining, Health, Sports, Scholarships & Transit) with real-time inventory, audit logs, and RBAC security.',
-    stack: ['Laravel', 'MySQL', 'Tailwind', 'Blade', 'Docker', 'JavaScript', 'PHP', 'Alpine', 'Livewire', 'Pusher', 'Aiven'], 
+    stack: ['Laravel', 'MySQL', 'Tailwind', 'Blade', 'Docker', 'Livewire', 'Aiven'],
     gradient: 'linear-gradient(135deg, rgba(122,0,255,0.6) 0%, rgba(10,10,15,0.9) 60%)',
     accent: 'var(--color-violet)',
     size: 'large',
     image: '/images/be1.webp',
     github: 'https://github.com/EnmaLv/SisgestiondeInventario',
+    isPrivate: false,
   },
   {
     id: 'moove',
+    slug: 'moove-transporte',
     title: 'Moove',
     subtitle: 'Transporte Inteligente',
     descES: 'App móvil institucional para el rastreo de rutas universitarias en tiempo real por GPS, validación de asistencia por proximidad y control de flota.',
@@ -25,35 +30,58 @@ const projects = [
     size: 'small',
     image: '/images/moove.png',
     github: 'https://github.com/EnmaLv/Moove',
+    isPrivate: false,
   },
   {
-    id: 'banagro',
-    title: 'Banagro',
-    subtitle: 'Next.js 15 + Framer Motion',
-    descES: 'Landing page para una institución bancaria agrícola en Venezuela. Incluye diseño de alta conversión, estimador interactivo de créditos y animaciones fluidas.',
-    descEN: 'Agro-finance landing page for a new agricultural bank in Venezuela. Features interactive loan estimator and fluid animations.',
-    stack: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript'],
+    id: 'nomit',
+    slug: 'nomit-fintech',
+    title: 'Nomit',
+    subtitle: 'Fintech / EWA Platform',
+    descES: 'Plataforma tecnológica de administración de nómina. Arquitectura multi-tenant con motor transaccional (idempotencia y bloqueo) y auditoría inmutable.',
+    descEN: 'Payroll management tech platform. Multi-tenant architecture with transactional engine (idempotency & locking) and immutable audit logs.',
+    stack: ['Laravel', 'PostgreSQL', 'Flutter', 'Docker', 'RBAC'],
+    gradient: 'linear-gradient(135deg, rgba(255,0,60,0.4) 0%, rgba(10,10,15,0.9) 60%)',
+    accent: 'var(--color-crimson)',
+    size: 'large',
+    image: '/images/nomit.png',
+    github: null,
+    isPrivate: true,
+  },
+  {
+    id: 'apolo',
+    slug: 'asistente-apolo',
+    title: 'Asistente Apolo',
+    subtitle: 'AI Desktop Agent',
+    descES: 'Asistente de voz y texto para GNU/Linux. Agente de tool-calling con 16 herramientas, capa de seguridad de 4 niveles y múltiples fallbacks de LLM.',
+    descEN: 'Voice and text assistant for GNU/Linux. Tool-calling agent with 16 tools, 4-tier security layer, and multi-LLM fallbacks.',
+    stack: ['Python', 'OpenAI', 'GTK3', 'Linux', 'SQLite'],
     gradient: 'linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(10, 10, 15, 0.9) 60%)',
     accent: '#10b981',
     size: 'small',
-    image: '/images/banagro.png',
-    github: null, // Proyecto privado
+    image: '/images/apolo.png',
+    github: null,
+    isPrivate: true,
   },
   {
-    id: 'scanner',
-    title: 'Portfolio',
-    subtitle: 'Astro + Tailwind',
-    descES: 'Portafolio web hiper-optimizado y herramientas de análisis visual con accesibilidad responsive y animaciones en CSS.',
-    descEN: 'Hyper-optimized portfolio website and visual performance tools with responsive design.',
-    stack: ['Astro', 'TypeScript', 'Tailwind'],
-    gradient: 'linear-gradient(135deg, rgba(255,0,60,0.4) 0%, rgba(10,10,15,0.9) 60%)',
-    accent: 'var(--color-crimson)',
+    id: 'banagro',
+    slug: 'banagro-landing',
+    title: 'Banagro',
+    subtitle: 'Agro-Finance Landing',
+    descES: 'Landing page para una institución financiera agrícola. Incluye simulador interactivo de créditos con periodo de gracia y optimización SEO.',
+    descEN: 'Agro-finance landing page. Features interactive loan estimator with grace period and SEO optimization.',
+    stack: ['React', 'Tailwind', 'TypeScript', 'Vite'],
+    gradient: 'linear-gradient(135deg, rgba(255, 165, 0, 0.35) 0%, rgba(10, 10, 15, 0.9) 60%)',
+    accent: '#ffa500',
     size: 'small',
-    image: '/images/portfolio.png',
-    github: 'https://github.com/EnmaLv/Portfolio',
-  }, 
-]
+    image: '/images/banagro.png',
+    github: null,
+    isPrivate: true,
+  },
+];
+
+const remaining = projects.length - INITIAL_COUNT;
 ---
+
 <section id="projects" style="padding: clamp(5rem, 10vw, 8rem) 0;">
   <div class="max-w-7xl mx-auto px-6">
     <div class="reveal" style="margin-bottom: 3.5rem;">
@@ -71,15 +99,22 @@ const projects = [
     <!-- Bento Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {projects.map((p, i) => (
-        <div class={`reveal reveal-delay-${i + 1} ${p.size === 'large' ? 'md:col-span-2' : ''}`}>
+        <div
+          class:list={[
+            'reveal',
+            `reveal-delay-${Math.min(i + 1, 5)}`,
+            p.size === 'large' ? 'md:col-span-2' : '',
+            i >= INITIAL_COUNT ? 'project-extra hidden visible' : ''
+          ]}
+        >
           <div
             class="project-card surface"
-            style={`min-height: ${p.size === 'large' ? '340px' : '280px'}; display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-radius: 1rem; overflow: hidden;`}
+            style={`height: ${p.size === 'large' ? '340px' : '280px'}; display: flex; flex-direction: column; justify-content: flex-end; position: relative; border-radius: 1rem; overflow: hidden;`}
           >
-            <!-- Background Gradient fallback -->
+            <!-- Gradient fallback -->
             <div style={`position: absolute; inset: 0; background: ${p.gradient}; border-radius: 1rem;`}></div>
 
-            <!-- Project Image with zoom effect -->
+            <!-- Image with cover: evita que la card crezca -->
             {p.image && (
               <img
                 src={p.image}
@@ -89,12 +124,12 @@ const projects = [
               />
             )}
 
-            <!-- Dark Overlay for text legibility -->
+            <!-- Dark overlay -->
             <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,15,0.95) 15%, rgba(10,10,15,0.4) 100%);"></div>
 
             <!-- Grid pattern -->
             <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 32px 32px; border-radius: 1rem;"></div>
-            
+
             <!-- Accent Dot -->
             <div style={`position: absolute; top: 1.5rem; left: 1.5rem; width: 8px; height: 8px; border-radius: 50%; background: ${p.accent}; box-shadow: 0 0 12px ${p.accent}; z-index: 2;`}></div>
 
@@ -115,7 +150,12 @@ const projects = [
               <h3 style={`font-family: var(--font-display); font-size: ${p.size === 'large' ? '1.75rem' : '1.25rem'}; font-weight: 700; line-height: 1.2; margin: 0 0 0.75rem;`}>
                 {p.title}
               </h3>
-              <p class="text-muted" style="font-size: 0.82rem; line-height: 1.7; max-width: 480px;" data-es={p.descES} data-en={p.descEN}>
+              <p
+                class="text-muted"
+                style={`font-size: 0.82rem; line-height: 1.7; max-width: 480px; display: -webkit-box; -webkit-line-clamp: ${p.size === 'large' ? 3 : 2}; -webkit-box-orient: vertical; overflow: hidden;`}
+                data-es={p.descES}
+                data-en={p.descEN}
+              >
                 {p.descES}
               </p>
             </div>
@@ -125,17 +165,129 @@ const projects = [
               <p style="font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; color: #ffffff; margin-bottom: 0.25rem;">
                 {p.title}
               </p>
-              <a href={p.github} target="_blank" rel="noreferrer" class="btn-overlay btn-overlay-secondary">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-                <span data-es="Ver Código" data-en="View Code">Ver Código</span>
-              </a>
-            </div>
 
+              <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
+                <a href={`/projects/${p.slug}`} class="btn-overlay btn-overlay-primary">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                  <span data-es="Ver Detalles" data-en="View Details">Ver Detalles</span>
+                </a>
+
+                {p.github && !p.isPrivate && (
+                  <a href={p.github} target="_blank" rel="noreferrer" class="btn-overlay btn-overlay-secondary">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                    <span data-es="Ver Código" data-en="View Code">Ver Código</span>
+                  </a>
+                )}
+
+                {p.isPrivate && (
+                  <span style="display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.7rem; color: rgba(255,255,255,0.6); padding: 0.5rem;">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span data-es="Privado" data-en="Private">Privado</span>
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       ))}
     </div>
+
+    <!-- Toggle Ver más / Ver menos -->
+    {remaining > 0 && (
+      <div style="display: flex; justify-content: center; margin-top: 2.5rem;">
+        <button
+          id="toggle-projects"
+          type="button"
+          aria-expanded="false"
+          style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 2rem; cursor: pointer; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; transition: border-color 0.3s ease, background 0.3s ease;"
+          data-show-more-es={`Ver más (${remaining})`}
+          data-show-more-en={`Show more (${remaining})`}
+          data-show-less-es="Ver menos"
+          data-show-less-en="Show less"
+        >
+          <span class="btn-label" data-es={`Ver más (${remaining})`} data-en={`Show more (${remaining})`}>Ver más ({remaining})</span>
+          <svg
+            class="toggle-arrow"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="transition: transform 0.3s ease;"
+          >
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      </div>
+    )}
   </div>
 </section>
+
+<script>
+  (function () {
+    const btn = document.getElementById('toggle-projects');
+    if (!btn) return;
+
+    const extras = document.querySelectorAll('.project-extra');
+    const label  = btn.querySelector('.btn-label');
+    const arrow  = btn.querySelector('.toggle-arrow');
+    if (!label) return;
+
+    let expanded = false;
+
+    const getLang = () =>
+      document.getElementById('btn-lang-es')?.classList.contains('active') ? 'es' : 'en';
+
+    const updateLabel = () => {
+      const lang = getLang();
+      const key  = expanded
+        ? (lang === 'es' ? 'data-show-less-es' : 'data-show-less-en')
+        : (lang === 'es' ? 'data-show-more-es' : 'data-show-more-en');
+      const txt  = btn.getAttribute(key) ?? '';
+      label.textContent = txt;
+      label.setAttribute('data-es', btn.getAttribute('data-show-more-es') === txt || expanded ? (expanded ? 'Ver menos' : btn.getAttribute('data-show-more-es') ?? '') : label.getAttribute('data-es') ?? '');
+      // Simplificación: siempre sincronizamos ambos atributos para que el toggle de idioma global siga funcionando
+      label.setAttribute('data-es', expanded ? 'Ver menos' : btn.getAttribute('data-show-more-es') ?? '');
+      label.setAttribute('data-en', expanded ? 'Show less' : btn.getAttribute('data-show-more-en') ?? '');
+    };
+
+    btn.addEventListener('click', () => {
+      expanded = !expanded;
+      btn.setAttribute('aria-expanded', String(expanded));
+
+      extras.forEach(el => {
+        el.classList.toggle('hidden', !expanded);
+        if (expanded) el.classList.add('visible');
+      });
+
+      if (arrow instanceof HTMLElement) arrow.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      updateLabel();
+    });
+
+    // Hover
+    btn.addEventListener('mouseenter', () => {
+      btn.style.borderColor = 'var(--color-crimson)';
+      btn.style.background  = 'rgba(255,0,60,0.1)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.borderColor = 'rgba(255,255,255,0.15)';
+      btn.style.background  = 'rgba(255,255,255,0.06)';
+    });
+
+    // Si el usuario cambia idioma con el toggle global, actualizar el botón
+    document.getElementById('btn-lang-es')?.addEventListener('click', updateLabel);
+    document.getElementById('btn-lang-en')?.addEventListener('click', updateLabel);
+  })();
+</script>

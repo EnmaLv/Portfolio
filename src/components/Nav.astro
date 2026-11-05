@@ -1,11 +1,6 @@
----
----
----
----
 <header class="glass-nav fixed top-0 left-0 right-0 z-50" style="height: 64px;">
   <div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-    <!-- Logo -->
-    <a href="#hero" class="flex items-center gap-2 sm:gap-3 no-underline group">
+    <a href="/#hero" class="flex items-center gap-2 sm:gap-3 no-underline group">
       <img src="/images/LogoEnmaWhite.png" alt="EnmaDev Logo" class="logo-white h-7 sm:h-8 w-auto object-contain" />
       <img src="/images/LogoEnmaBlack.png" alt="EnmaDev Logo" class="logo-black h-7 sm:h-8 w-auto object-contain" />
       <span class="logo-text hidden sm:inline" style="font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;">
@@ -13,42 +8,36 @@
       </span>
     </a>
 
-    <!-- Nav links Desktop -->
     <nav class="hidden md:flex items-center gap-8">
-      <a href="#hero" class="nav-link" data-es="Inicio" data-en="Home">Inicio</a>
-      <a href="#about" class="nav-link" data-es="Sobre Mí" data-en="About">Sobre Mí</a>
-      <a href="#projects" class="nav-link" data-es="Proyectos" data-en="Projects">Proyectos</a>
-      <a href="#contact" class="nav-link" data-es="Contacto" data-en="Contact">Contacto</a>
+      <a href="/#hero"     class="nav-link" data-es="Inicio"    data-en="Home">Inicio</a>
+      <a href="/#about"    class="nav-link" data-es="Sobre Mí"  data-en="About">Sobre Mí</a>
+      <a href="/#projects" class="nav-link" data-es="Proyectos" data-en="Projects">Proyectos</a>
+      <a href="/#contact"  class="nav-link" data-es="Contacto"  data-en="Contact">Contacto</a>
     </nav>
 
-    <!-- Controls -->
     <div class="flex items-center gap-3">
-      <!-- Lang toggle -->
       <div class="flex items-center gap-1" style="font-size: 0.72rem; font-weight: 700;">
         <button id="btn-lang-es" class="lang-btn active" style="background: none; border: none; cursor: pointer; padding: 4px; color: var(--color-crimson);">ES</button>
         <span style="color: rgba(255,255,255,0.2);">|</span>
         <button id="btn-lang-en" class="lang-btn" style="background: none; border: none; cursor: pointer; padding: 4px; color: rgba(255,255,255,0.45);">EN</button>
       </div>
 
-      <!-- Theme toggle -->
       <button id="themeToggle" aria-label="Toggle theme" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
         <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d9ff" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ff003c" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
       </button>
 
-      <!-- Botón Menú Móvil -->
       <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center p-2 text-white" aria-label="Abrir Menú">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
       </button>
     </div>
   </div>
 
-  <!-- Menú desplegable móvil -->
   <div id="mobile-menu" class="hidden md:hidden fixed inset-x-0 top-[64px] bg-black/95 backdrop-blur-lg border-b border-white/10 p-6 flex flex-col gap-4 text-center">
-    <a href="#hero" class="mobile-nav-link text-lg font-medium py-2" data-es="Inicio" data-en="Home">Inicio</a>
-    <a href="#about" class="mobile-nav-link text-lg font-medium py-2" data-es="Sobre Mí" data-en="About">Sobre Mí</a>
-    <a href="#projects" class="mobile-nav-link text-lg font-medium py-2" data-es="Proyectos" data-en="Projects">Proyectos</a>
-    <a href="#contact" class="mobile-nav-link text-lg font-medium py-2" data-es="Contacto" data-en="Contact">Contacto</a>
+    <a href="/#hero"     class="mobile-nav-link text-lg font-medium py-2" data-es="Inicio"    data-en="Home">Inicio</a>
+    <a href="/#about"    class="mobile-nav-link text-lg font-medium py-2" data-es="Sobre Mí"  data-en="About">Sobre Mí</a>
+    <a href="/#projects" class="mobile-nav-link text-lg font-medium py-2" data-es="Proyectos" data-en="Projects">Proyectos</a>
+    <a href="/#contact"  class="mobile-nav-link text-lg font-medium py-2" data-es="Contacto"  data-en="Contact">Contacto</a>
   </div>
 </header>
 
